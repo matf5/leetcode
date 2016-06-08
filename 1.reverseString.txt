@@ -9,12 +9,14 @@ solution:
 public class Solution {
     public String reverseString(String s) {
         int len  = s.length();
-        String ans = "";
-        for(int i=0;i<len;i++){
-            ans += s.charAt(i);
+        StringBuilder ans = new StringBuilder();
+        for(int i=len-1;i>=0;i--){
+            
+            ans.append(s.charAt(i));
         }
-        return ans;
+        return ans.toString();
     }
 }
-
+StringBuilder append 速度比string + 快
+本题也可使用原生方法  return  new StringBuilder(s).reverse().toString();
 string.charAt(i) 返回字符串在该位置的字符
