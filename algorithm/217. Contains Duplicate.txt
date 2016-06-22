@@ -1,0 +1,23 @@
+Given an array of integers, find if the array contains any duplicates. 
+Your function should return true if any value appears at least twice in the array, 
+and it should return false if every element is distinct.
+
+判断一个数组内是否有相同的数字
+
+
+solution:
+直接采用hashmap会超时
+故
+采用Arrays.sort()先排序
+
+public class Solution {
+    public boolean containsDuplicate(int[] nums) {
+        int len = nums.length;
+        Arrays.sort(nums);
+        for(int i =0;i<len-1;i++){
+            if(nums[i]==nums[i+1])
+            return true;
+        }
+        return false;
+    }
+}
