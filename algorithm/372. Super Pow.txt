@@ -1,0 +1,51 @@
+Your task is to calculate ab mod 1337 where a is a positive integer and 
+b is an extremely large positive integer given in the form of an array.
+
+Example1:
+
+a = 2
+b = [3]
+
+Result: 8
+Example2:
+
+a = 2
+b = [1,0]
+
+Result: 1024
+
+solution:
+
+public class Solution {
+    public int superPow(int a, int[] b) {
+        int len = b.length;
+        double[] ans= new double[len];
+        ans[0]=(double)a%1337;
+        double rel=1;
+        for(int i =1;i<len;i++){
+            ans[i]=1;
+            for(int j=0;j<=4;j++)
+            ans[i] *=Math.pow(ans[i-1],2)%1337;
+            ans[i]%=1337;
+        }
+        for(int i =0;i<len;i++){
+            if(b[len-i-1]==0)
+            rel+=0;
+            else{
+            int k=b[len-i-1];
+            for(int j=0;j<k/2;j++){
+                //rel*= (Math.pow(ans[i],(double)b[len-i-1]))%1337;
+                rel*= (Math.pow(ans[i],2))%1337;
+                rel %=1337;
+            }
+            if(k%2==1){
+            rel *= ans[i]%1337;
+            }
+           
+            }
+            rel %=1337;
+        }
+        
+        return (int)rel;
+    }
+}
