@@ -1,0 +1,68 @@
+Determine if a Sudoku is valid, according to: Sudoku Puzzles - The Rules.
+
+The Sudoku board could be partially filled, where empty cells are filled with the character '.'.
+
+
+A partially filled sudoku which is valid.
+
+Note:
+A valid Sudoku board (partially filled) is not necessarily solvable. 
+Only the filled cells need to be validated.
+
+Subscribe to see which companies asked this question
+
+solution:
+
+public class Solution {
+    public boolean isValidSudoku(char[][] board) {
+        int[] map;
+        int num=0;
+        if(board.length!=9||board[0].length!=9)
+        return false;
+        for(int i =0;i<9;i++){
+            map = new int[10];
+            for(int j=0;j<9;j++){
+                if(board[i][j]=='.')
+                continue;
+                if(board[i][j]<'0'||board[i][j]>'9')
+                return false;
+                num = board[i][j]-'0';
+                if(map[num]==1)
+                return false;
+                map[num]=1;
+            }
+            
+        }
+        for(int j=0;j<9;j++){
+            map = new int[10];
+            for(int i=0;i<9;i++){
+                if(board[i][j]=='.')
+                continue;
+                if(board[i][j]<'0'||board[i][j]>'9')
+                return false;
+                num = board[i][j]-'0';
+                if(map[num]==1)
+                return false;
+                map[num]=1;
+            }
+            
+        }
+        
+        for(int i=0;i<9;i+=3){
+            
+            for(int j=0;j<9;j+=3){
+                map = new int[10];
+                 for(int k=i;k<i+3;k++){
+                    for(int l=j;l<j+3;l++){
+                        if(board[k][l]=='.')continue;
+                        num=board[k][l]-'0';
+                        if(map[num]==1)return false;
+                        map[num]=1;
+                    }
+                }
+            }
+        }
+        return true;
+        
+    }
+}
