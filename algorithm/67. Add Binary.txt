@@ -1,0 +1,84 @@
+Given two binary strings, return their sum (also a binary string).
+
+For example,
+a = "11"
+b = "1"
+Return "100".
+
+Subscribe to see which companies asked this question
+
+solution:
+
+public class Solution {
+    public String addBinary(String a, String b) {
+        int lena = a.length();
+        int lenb = b.length();
+        int flag=0;
+        int lenl=0;
+        int lens=0;
+        if(lena>lenb)
+        {
+        lenl=lena;
+        lens=lenb;
+        }
+        else{
+            lenl=lenb;
+            lens=lena;
+            flag=1;
+        }
+        int[] ia = new int[lenl];
+        int i,j;
+        int temp=0;
+        for(i=lena-1,j=lenb-1;i>=0&&j>=0;i--,j--){
+            if(flag==0)
+            ia[i]=(a.charAt(i)-'0')+(b.charAt(j)-'0');
+            else
+            ia[j]=(a.charAt(i)-'0')+(b.charAt(j)-'0');
+            
+        }
+        //  System.out.print("---------------");
+        
+        // for(i=0;i<lenl;i++){
+            
+        //     System.out.print(Integer.toString(ia[i]));
+        // }
+       
+            for(int k=lenl-lens-1;k>=0;k--){
+             if(flag==0)
+             ia[k]=a.charAt(k)-'0';
+             else
+             ia[k]=b.charAt(k)-'0';
+            
+        }
+        // System.out.print("---------------");
+        
+        // for(i=0;i<lenl;i++){
+            
+        //     System.out.print(Integer.toString(ia[i]));
+        // }
+        for(i=lenl-1;i>0;i--){
+            if(ia[i]+temp>=2)
+            {
+            ia[i]=ia[i]+temp-2;
+            temp=1;
+            
+            }
+            else{
+                ia[i]=ia[i]+temp;
+                temp=0;
+            }
+            
+        }
+        String ans="";
+        if(temp+ia[0]>=2)
+        {
+            ans+='1';
+            ia[0]=ia[0]+temp-2;
+        }
+        for(i=0;i<lenl;i++){
+            //System.out.print(Integer.toString(ia[i]));
+            ans+=(char)(ia[i]+'0');
+        }
+        return ans;
+    }
+}
